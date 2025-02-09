@@ -16,13 +16,15 @@ public class WeatherController {
 
   @GetMapping("/forecast/{city}")
   public ResponseEntity<CityInfo> forecastByCity(@PathVariable("city") String city) {
-
     CityInfo ci = weatherService.forecastByCity(city);
 
     return ResponseEntity.ok(ci);
   }
 
-  // TODO: given two city names, compare the length of the daylight hours and return the city with the longest day
+  @GetMapping("/compare-daylight/{city1}/{city2}")
+  public ResponseEntity<String> compareDaylightHours(@PathVariable("city1") String city1, @PathVariable("city2") String city2) {
+    String longestDay = weatherService.compareDaylightHours(city1, city2);
 
-  // TODO: given two city names, check which city its currently raining in
+    return ResponseEntity.ok(longestDay);
+  }
 }
