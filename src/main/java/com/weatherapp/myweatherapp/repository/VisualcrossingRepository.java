@@ -14,10 +14,11 @@ public class VisualcrossingRepository {
   String key;
 
 
-  public CityInfo getByCity(String city) {
+  public CityInfo getByCity(String city, boolean includeId) {
     String uri = url + "timeline/" +city + "?key=" + key;
+    uri = includeId ? uri + "&lang=id" : uri;
+
     RestTemplate restTemplate = new RestTemplate();
     return restTemplate.getForObject(uri, CityInfo.class);
-
   }
 }
