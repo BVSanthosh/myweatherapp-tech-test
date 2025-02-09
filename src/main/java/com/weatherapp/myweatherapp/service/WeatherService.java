@@ -15,4 +15,24 @@ public class WeatherService {
 
     return weatherRepo.getByCity(city);
   }
+
+  public String compareDaylightHours(String city1, String city2) {
+    CityInfo ci1 = weatherRepo.getByCity(city1);
+    CityInfo ci2 = weatherRepo.getByCity(city2);
+
+    if (ci1 == null || ci2 == null) {
+      throw new IllegalArgumentException("One or both of the cities could noto be found.");
+    }
+
+    long city1Daylight = ci1.getDaylightDuration();
+    long city2Daylight = ci2.getDaylightDuration();
+
+    if (city1Daylight > city2Daylight) {
+      return ci1.getAddress();
+    } else if (city1Daylight < city2Daylight) {
+      return ci2.getAddress();
+    } else {
+      return "Both cities have the same dayight duration";
+    }
+  }
 }
