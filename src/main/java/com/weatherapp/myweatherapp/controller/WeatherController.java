@@ -27,4 +27,11 @@ public class WeatherController {
 
     return ResponseEntity.ok(longestDay);
   }
+
+  @GetMapping("/rain-check/{city1}/{city2}")
+  public ResponseEntity<String> rainCheck(@PathVariable("city1") String city1, @PathVariable("city2") String city2) {
+    String rainConditions = weatherService.rainCheck(city1, city2);
+
+    return ResponseEntity.ok(rainConditions);
+  }
 }
