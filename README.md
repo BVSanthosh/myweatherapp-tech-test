@@ -40,12 +40,10 @@ It provides the following features:
 3. Run the Application:
 
    ```sh
-   cd myweatherapp-tech-test-main
    mvn spring-boot:run
    ```
 4. Run unit tests:
    ```sh
-   cd myweatherapp-tech-test-main
    mvn test
    ```
 5. Access the Swagger API Docs: http://localhost:8080/swagger-ui.html  
