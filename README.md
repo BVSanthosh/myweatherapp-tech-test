@@ -8,7 +8,13 @@ It provides the following features:
 
 - **Forecast by City**: Get current weather conditions for a given city.
 - **Compare Daylight Hours**: Compare the daylight duration between two cities.
-- **Rain Check**: Determine whether it is raining in one or both of two cities.
+- **Rain Check**: Determine whether it is raining in the specified cities.
+
+## Submission Includes
+- Functionality for comparing daylight and rain check features
+- Local and Global Exception handling
+- Unit and API tests
+- Documentation
 
 ## Technologies Used
 - Java 17
