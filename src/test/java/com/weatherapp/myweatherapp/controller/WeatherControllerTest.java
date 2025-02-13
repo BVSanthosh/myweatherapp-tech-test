@@ -20,22 +20,33 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.*;
 
+/**
+ * Unit tests for the WeatherController class.
+ * These tests ensure that the controller layer is able to communicate with the service layer to generate the appropriate HTTP responses.
+ */
 @ExtendWith(MockitoExtension.class)
 public class WeatherControllerTest {
-
+    //The controller being tested 
     @InjectMocks
     WeatherController weatherController;
 
+    //Mocked service used by the controller
     @Mock
     private WeatherService weatherService; 
 
+    /**
+     * Setup method that initializes the mock HTTP request and sets it in the request context.
+     */
     public void setUp() {
         MockHttpServletRequest request = new MockHttpServletRequest();
         RequestContextHolder.setRequestAttributes(new ServletRequestAttributes(request));
     }
 
+    /**
+     * Test to verify that the forecastByCity method throws an HttpClientErrorException when an invalid city is provided.
+     */
     @Test
-    @DisplayName("Should throw HttpClientErrorException  when the city is invalid")
+    @DisplayName("Should throw HttpClientErrorException when the city is invalid")
     public void forecastByCity_invalidCity_throwsHttpClientErrorException(){
         String invalidCity = "invalidCity";
 
@@ -48,6 +59,9 @@ public class WeatherControllerTest {
         verify(weatherService, times(1)).forecastByCity(invalidCity);
     }
 
+    /**
+     * Test to verify that the forecastByCity method returns the correct CityInfo obbject when a valid city is provided.
+     */
     @Test
     @DisplayName("Should return the correct CityInfo object as when the city is valid")
     public void forecastByCity_validCity_returnsCityInfo() {
@@ -62,6 +76,9 @@ public class WeatherControllerTest {
         assertEquals(validCity, response.getBody().getAddress());
     }
 
+    /**
+     * Test to verify that the compareDaylightHours method throws an HttpClientErrorException when invalid city names are provided.
+     */
     @Test
     @DisplayName("Should throw HttpClientErrorException when the cities are invalid")
     public void compareDaylightHours_invalidCities_throwsHttpClientErrorException() {
@@ -77,6 +94,9 @@ public class WeatherControllerTest {
         verify(weatherService, times(1)).compareDaylightHours(invalidCity1, invalidCity2);
     }
 
+    /**
+     * Test to verify that the compareDaylightHours method returns the correct city with the longer daylight when two valid cities are provided.
+     */
     @Test
     @DisplayName("Should return the city with longer daylight when the cities are valid")
     public void compareDaylightHours_validCities_returnsCorrectCity() {
@@ -93,6 +113,9 @@ public class WeatherControllerTest {
         verify(weatherService, times(1)).compareDaylightHours(validCity1, validCity2);
     }
 
+    /**
+     * Test to verify that the rainCheck method throws an HttpClientErrorException when invalid city names are provided.
+     */
     @Test
     @DisplayName("Should throw IllegalArgumentException when the cities is invalid")
     public void rainCheck_invalidCities_throwsIllegalArgumentException() {
@@ -108,6 +131,9 @@ public class WeatherControllerTest {
         verify(weatherService, times(1)).rainCheck(invalidCity1, invalidCity2);
     }
 
+    /**
+     * Test to verify that the rainCheck method returns the correct message when valid city names are provided.
+     */
     @Test
     @DisplayName("Should return the cities with rain when the cities are valid")
     public void rainCheck_validCities_returnsCorrectCity() {

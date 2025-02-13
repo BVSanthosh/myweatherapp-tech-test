@@ -10,7 +10,12 @@ import java.time.Duration;
 import java.time.LocalTime;
 import java.time.format.DateTimeParseException;
 
+/**
+ * Model layer stores the weather data of a specific city represented as a CityInfo class.
+ * This class contains properties and methods for accessing the data as well as implementation for the daylight duration and rain check features.
+ */
 public class CityInfo {
+  //A set containing the code names for rain conditions
   private static final Set<String> RAIN_CODES = Set.of(
     "type_21",
     "type_10",
@@ -56,6 +61,11 @@ public class CityInfo {
     this.address = address;
   }
 
+  /**
+   * Accesses the sunrise field.
+   * 
+   * @return The sunrise time.
+   */
   public String getSunrise() {
     return currentConditions.sunrise;
   }
@@ -64,6 +74,11 @@ public class CityInfo {
     this.currentConditions.sunrise = sunrise;
   }
 
+  /**
+   * Accesses the sunset field.
+   * 
+   * @return The sunset time.
+   */
   public String getSunset() {
     return currentConditions.sunset;
   }
@@ -72,6 +87,12 @@ public class CityInfo {
     this.currentConditions.sunset = sunset;
   }
 
+  /**
+   * Accesses the conditions field.
+   * 
+   * @return The current weather conditions.
+   * @throws IllegalStateException If the conditions field are empty.
+   */
   public String getConditions() {
     if (currentConditions == null || currentConditions.conditions == null) {
       throw new IllegalStateException("Conditions data is missing for: " + address);
@@ -84,6 +105,13 @@ public class CityInfo {
     currentConditions.conditions = conditions;
   }
 
+  /**
+   * Calculates the daylight duration for the city using the sunrise and sunset times.
+   * 
+   * @return The daylight duration in seconds.
+   * @throws IllegalStateException If the sunrise or sunset fields are empty.
+   * @throws IllegalArgumentException If the time format for sunrise and sunset are invalid.
+   */
   public long getDaylightDuration() {
     String sunrise = getSunrise();
     String sunset = getSunset();
@@ -99,6 +127,11 @@ public class CityInfo {
     }
   }
 
+  /**
+   * Checks whether it is currently raining in the city based on the description in the conditions field.
+   * 
+   * @return A boolean stating whether the city has rain or not.
+   */
   public boolean isRaining() {
     return Arrays.stream(getConditions().split(","))
       .map(String::trim)
