@@ -11,10 +11,14 @@ It provides the following features:
 - **Rain Check**: Determine whether it is raining in the specified cities.
 
 ## Submission Includes
-- Functionality for comparing daylight and rain check features (/src/main/java/com/weatherapp/myweatherapp/)
-- Local and Global Exception handling (/src/main/java/com/weatherapp/myweatherapp/exception/GlobalExceptionHandler.java)
-- Unit and API tests (/src/test/java/com/weatherapp/myweatherapp/)
-- Documentation (/WeatherApp_Documentation.pdf)
+- Functionality for comparing daylight and rain check features
+  - Path: /src/main/java/com/weatherapp/myweatherapp/
+- Local and Global Exception handling 
+  - Path: /src/main/java/com/weatherapp/myweatherapp/exception/GlobalExceptionHandler.java
+- Unit and API tests
+  - Path: /src/test/java/com/weatherapp/myweatherapp/
+- Documentation
+  - Path: /WeatherApp_Documentation.pdf
 
 ## Technologies Used
 - Java 17
