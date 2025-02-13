@@ -6,12 +6,23 @@ import com.weatherapp.myweatherapp.repository.VisualcrossingRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+/**
+ * Service layer responsible for executing the business logic.
+ * This class interacts with the Repository and Model layers to produce an output to be sent to the Controller.
+ */
 @Service
 public class WeatherService {
-
+  //Injected repository to fetch the weater data from Visual Crossing API
   @Autowired
   VisualcrossingRepository weatherRepo;
 
+  /**
+   * Retrieves the weather forecast for a given city.
+   * 
+   * @param city The name of the city for which to fetch weather data.
+   * @return A CityInfo object containing weather details.
+   * @throws IllegalArgumentException If the city is not found.
+   */
   public CityInfo forecastByCity(String city) {
     CityInfo ci = weatherRepo.getByCity(city, false);
 
@@ -22,6 +33,13 @@ public class WeatherService {
     return ci;
   }
 
+  /**
+   * Compares the daylight duration between the given cities. 
+   * 
+   * @param city1 The first city.
+   * @param city1 The second city.
+   * @return A message specifiying which city has the longer daylight duration.
+   */
   public String compareDaylightHours(String city1, String city2) {
     CityInfo ci1 = weatherRepo.getByCity(city1, false);
     CityInfo ci2 = weatherRepo.getByCity(city2, false);
@@ -38,6 +56,13 @@ public class WeatherService {
     }
   }
 
+  /**
+   * Checks the weather conditions in the given cities. 
+   * 
+   * @param city1 The first city.
+   * @param city1 The second city.
+   * @return A message specifiying where it is currently raining.
+   */
   public String rainCheck(String city1, String city2) {
     CityInfo ci1 = weatherRepo.getByCity(city1, true);
     CityInfo ci2 = weatherRepo.getByCity(city2, true);
